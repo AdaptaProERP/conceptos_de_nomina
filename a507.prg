@@ -10,6 +10,8 @@ FUNCTION A507(uPar1,uPar2,uPar3,uPar4,uPar5)
 
    vaca:=C_A002/(SALARIO/30)
 
+   VARIAC:=1
+
 IF vaca>9
 
   IF  nDiasIna<CNS(028) .AND. C_A002>0

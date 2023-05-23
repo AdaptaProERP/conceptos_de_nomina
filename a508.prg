@@ -9,6 +9,7 @@ FUNCTION A508(uPar1,uPar2,uPar3,uPar4,uPar5)
    nDiasIna2:=VARPRE("D002")
 
    vaca:=C_A002/(SALARIO/30)
+   VARIAC:=1
 
 IF vaca>9
 

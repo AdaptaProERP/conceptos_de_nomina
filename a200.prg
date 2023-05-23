@@ -1,5 +1,5 @@
 FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
-   LOCAL nResult:=0
+  LOCAL nResult:=0
   LOCAL nDiario:=0
   LOCAL nDiasT :=0 // Dias trabajados en Caso de Vacaciones/Liquidación
   LOCAL nD001  :=0
@@ -78,4 +78,3 @@ FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
   ENDIF
 
 RETURN nResult
-// EOF
