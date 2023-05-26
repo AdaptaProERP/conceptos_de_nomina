@@ -54,6 +54,7 @@ FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
   nD001    :=ACUMV_FCH("D001",oNm:dDesde,oNm:dHasta) // Inasistencia y Permisos no Remuneados
   nD010    :=ACUMV_FCH("D010",oNm:dDesde,oNm:dHasta) // Repososo
   nN061    :=ACUMV_FCH("N061",oNm:dDesde,oNm:dHasta) // Permiso no Remunerado
+  nN062    :=ACUMV_FCH("N062",oNm:dDesde,oNm:dHasta) // Dias de Reposo
   VARIAC   :=MIN(FECHA_ING-oNm:dHasta,30)            // Tomando la Fecha de Ingreso, si ingresó el 10 de mayo, será 20 dias
   VAROBSERV:="Valor Diario: "+LSTR(nDiario)
 
