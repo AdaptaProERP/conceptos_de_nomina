@@ -6,6 +6,7 @@ FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
   LOCAL nD010  :=0 // Reposo
   LOCAL nN061  :=0 // Permiso no Remunerado
   LOCAL nN062  :=0 // Reposo Medico
+  LOCAL nCestaT:=0 // Monto del Cesta Ticket
 
   IF !(CONDICION$"AL" .AND. (oNm:cOtraNom="CT" .OR. oNm:cOtraNom="LI" .OR. oNm:cOtraNom="VI"))
      RETURN 0
@@ -17,11 +18,12 @@ FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
   ENDIF
 
   // Valor Diario
-  nDiario    :=ROUND(CNS(90)/30,2)
+  nCestaT    :=MAX(CNS(90),1000)
+  nDiario    :=ROUND(nCestaT/30,2)
 
   IF oDp:lPlanifica
      VARIAC :=30
-     nResult:=CNS(90)
+     nResult:=nCestaT
      RETURN nResult
   ENDIF
 
@@ -54,7 +56,6 @@ FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
   nD001    :=ACUMV_FCH("D001",oNm:dDesde,oNm:dHasta) // Inasistencia y Permisos no Remuneados
   nD010    :=ACUMV_FCH("D010",oNm:dDesde,oNm:dHasta) // Repososo
   nN061    :=ACUMV_FCH("N061",oNm:dDesde,oNm:dHasta) // Permiso no Remunerado
-  nN062    :=ACUMV_FCH("N062",oNm:dDesde,oNm:dHasta) // Dias de Reposo
   VARIAC   :=MIN(FECHA_ING-oNm:dHasta,30)            // Tomando la Fecha de Ingreso, si ingresó el 10 de mayo, será 20 dias
   VAROBSERV:="Valor Diario: "+LSTR(nDiario)
 
@@ -80,9 +81,9 @@ FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
 
   IF VARIAC=30
     // Cobro Completo
-    nResult:=CNS(90)
+    nResult:=nCestaT
   ELSE
-    nResult:=CNS(90)-(nDiario*nD001)
+    nResult:=nCestaT-(nDiario*nD001)
   ENDIF
 
 RETURN nResult
