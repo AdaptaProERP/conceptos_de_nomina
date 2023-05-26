@@ -3,6 +3,7 @@ FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
   LOCAL nDiario:=0
   LOCAL nDiasT :=0 // Dias trabajados en Caso de Vacaciones/Liquidación
   LOCAL nD001  :=0
+  LOCAL nD010  :=0 // Reposo
   LOCAL nN061  :=0 // Permiso no Remunerado
   LOCAL nN062  :=0 // Reposo Medico
 
@@ -11,12 +12,18 @@ FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
   ENDIF
 
   // Esta Liquidado y Fuera del Mes de pago
-  IF FECHA_EGR<oNm:dDesde
+  IF !Empty(FECHA_EGR) .AND. FECHA_EGR<oNm:dDesde
      RETURN 0
   ENDIF
 
   // Valor Diario
   nDiario    :=ROUND(CNS(90)/30,2)
+
+  IF oDp:lPlanifica
+     VARIAC :=30
+     nResult:=CNS(90)
+     RETURN nResult
+  ENDIF
 
   // Liquidación
   IF oNm:cOtraNom=[LI].AND.TABLALIQ()
