@@ -30,13 +30,16 @@ FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
  IF nDiasT=0
     lVariac:=.T.     // Solicita Variación
     nDias  :=VARIAC  // Días del mes, serán introducidor manualmente por variacines
+ ELSE
+    nDias  :=nDias-nDiasIna // Resta la inasistencia
+    VARIAC :=nDias
  ENDIF
 
  IF nDiario=0
    nDiario :=CNS(90)  // En Bs
  ENDIF
 
- nVariac :=nDias
+ VARIAC  :=nDias
  nResult :=nDias*nDiario
 
 RETURN nResult
