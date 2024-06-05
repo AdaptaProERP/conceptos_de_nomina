@@ -23,7 +23,13 @@ FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
  dDesde  :=MAX(oNm:dDesde,FECHA_ING)       // Fecha de Ingreso
  nDias   :=dHasta-dDesde                   // Cantidad de Días Trasncurridos
  nDiario :=CNS(300)*oNm:nDivisa            // Cesta en Divisas
- nDiasIna:=ACUMV_FCH("D001",dDesde,dHasta) // Días de Inasistencia
+ nD200    :=VARPRE("D200")                 // Días Descontados por Inasistencia
+
+ IF nD200=0
+    nDiasIna:=ACUMV_FCH("D001",dDesde,dHasta) // Días de Inasistencia
+ ELSE
+    nDiasIna:=nD200
+ ENDIF
 
  nDiasT  :=ASIGN(dDesde,dHasta)            // Asignaciones del mes Pasado,
  // Si no hay histórico de nomina el mes pasado,inicia nomina el mes presente
@@ -50,36 +56,37 @@ FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
 RETURN nResult
 // EOF
 /*
-Obtiene  la Cantidad de días hábiles existentes del periodo, adiciona los 
-días indicados en el concepto "N012" , resta los días registrados en el 
-concepto "N013", las inasistencias del mes según el concepto: "D001".
+Mejora en concepto A200 Cesta ticket socialista
 
-Los siguientes conceptos ya no se tomaran en cuenta segun Reposos Medicos
-los días de inasistencia asumido por vacaciones en el concepto "N060" y los 
-permisos remunerados en el concepto "N061". Cabe destacar que los valores 
-obtenidos de los conceptos: D001, N060 y N061 corresponde a los registros
-históricos del proceso de nóminas corrientes: Semanal, Quincenal y Mensual.
+1. Valor diario del Cesta ticket:
+  a. En el caso que sea calculado según el valor de la divisa, requiere constante
+     el valor del “cesta ticket” en divisa en la constante "300".
+  b. Caso contrario será calculado en Bs según el valor de la constante "90"
 
-De acuerdo con el artículo 2, parágrafo segundo de la Ley de Alimentación 
-para los Trabajadores y Trabajadoras la empresa está obligada a otorgar el 
-beneficio a los trabajadores que devenguen un salario mensual que no exceda 
-tres (03) salarios mínimos decretados por el Ejecutivo Nacional. 
+2. Cantidad de Días:
+   a. La cantidad de días corrientes desde el inicio hasta el final del mes
+      pasado.
+   b. Si el trabajador ingresó el mes de cálculo, asume el día de ingreso
+      hasta el final del mes para calcular la cantidad de días.
+   c. Si el trabajador concluyó laboralmente el mes de cálculo o mes pasado,
+      la cantidad de días serán calculados desde el primero de mes hasta el día
+      de su conclusión laboral.
+   d. Si el trabajador no tiene historial del pago durante el periodo de pago
+      activa la funcionalidad variación para que el usuario introduzca la
+      cantidad de días de pago que serán representado en la variable VARIAC
+   e. Si la cantidad de días de variación VARIAC es cero, será asumido la
+      cantidad de días transcurridos en el periodo o mes pasado.
 
-El artículo 2, parágrafo tercero de la Ley de Alimentación para los Trabajadores 
-y Trabajadoras establece que el beneficio de alimentación podrá ser concedido, 
-concertada o voluntariamente, por los empleadores y empleadoras y podrá 
-extenderse a los trabajadores que devenguen una remuneración superior a los 
-tres (3) salarios mínimos.
+3. Deducción:
 
-La entrega del ticket o la recarga electrónica, puede efectuarse durante 
-todo el mes en curso y hasta los cinco (05) días siguientes al vencimiento 
-del mes respectivo.
+   a. Descuenta los días de inasistencia según el histórico de variaciones del
+   concepto D001 y será mostrado en el recibo de Ingreso mediante el concepto
+   N020.
+   b. Si desea separar en asignación y deducción el cesta ticket deberá
+   introducir la cantidad de días de inasistencia en el Concepto D200
 
-el Artículo 6 de la Ley de Alimentación indica, que se debe pagar igualmente 
-al trabajador el beneficio de tickets o tarjetas electrónicas de alimentación, 
-cuando la jornada de trabajo no sea cumplida por el trabajador por causas 
-imputables al patrono, cuando el trabajador se encuentre en situación de 
-riesgo, incapacidad por enfermedad o accidente que no exceda los doce (12) 
-meses, vacaciones, reposo prenatal y postnatal, y permiso por paternidad.
+
+Programa fuente:
+https://github.com/AdaptaProERP/conceptos_de_nomina/blob/main/a200.prg
 
 /*
