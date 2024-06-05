@@ -35,6 +35,11 @@ FUNCTION A200(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
     VARIAC :=nDias
  ENDIF
 
+ // Si no tienen días, asume todos los días del mes Pasado
+ IF VARIAC=0
+    nDias:=dHasta-dDesde
+ ENDIF
+
  IF nDiario=0
    nDiario :=CNS(90)  // En Bs
  ENDIF
