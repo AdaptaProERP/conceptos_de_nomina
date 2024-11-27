@@ -5,8 +5,8 @@ DD:=dDesde
 DH:=dHasta
  IF CONDICION="A" .AND. FECHA_ING<=oNm:dHasta
    // C~lculos
-   lVariac:=.T. // Indica si Requiere Valor en VariaciÂ©n
-   nDias  :=AUSENCIA("PSR",@dDesde,@dHasta,@nDiasCal,@VAROBSERV) // DÃ‘as de Inasistencia en el periodo
+   lVariac:=.T. // Indica si Requiere Valor en Variaci©n
+   nDias  :=AUSENCIA("PSR",@dDesde,@dHasta,@nDiasCal,@VAROBSERV) // DÑas de Inasistencia en el periodo
    IF nDias=0
      // Si no hay ausencias asume, las solicita en Variacion
      lVariac:=.T.
@@ -17,3 +17,10 @@ DH:=dHasta
 
 RETURN VARIAC
 // <EOF>
+/*
+Está relacionado con la tabla de ausencias, que a través de la funci©n AUSENCIA("PSR") 
+determina la cantidad de días  laborables no trabajados durante el periodo de pago que 
+no será deducidos como inasistencia y tampoco será descontado en futuros pagos.  
+Utilizado para Descontar Cesta Ticket
+
+/*

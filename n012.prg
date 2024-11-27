@@ -11,3 +11,8 @@ FUNCTION N012(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
 
 RETURN nResult
 // EOF
+/*
+Solicita la cantidad de días que por cualquier motivo serán adicionados en el cálculo de
+Cesta Ticket realizado por el Concepto "A200".
+
+/*

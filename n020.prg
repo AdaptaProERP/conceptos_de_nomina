@@ -15,3 +15,8 @@ nResult := nDaus*cns(90)
 
 RETURN nResult
 // EOF
+/*
+Solicita la cantidad de días que por cualquier motivo serán deducidos en el cálculo de 
+Cesta Ticket realizado por el Concepto "A200".
+
+/*

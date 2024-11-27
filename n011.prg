@@ -13,7 +13,7 @@ FUNCTION N011(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
 
  nResult:=nDias*nDiario
  cMemo  :="Antig_edad :"+cAnt+ " Desde "+DTOC(FECHA_ING)+" Al "+DTOC(oDp:dFchFin)+CRLF+;
-          "Concepto        DÃ­as         Diario            Monto"+CRLF+;
+          "Concepto        Días         Diario            Monto"+CRLF+;
           "-------------- ----- -------------- ----------------"+CRLF
 
  cMemo  :=cMemo+;
@@ -53,3 +53,7 @@ FUNCTION N011(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
 
 RETURN nResult+nUtilid+nVacaci+n219+n223
 // <EOF>
+/*
+
+
+/*

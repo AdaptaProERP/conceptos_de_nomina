@@ -14,3 +14,7 @@ FUNCTION N025(uPar1,uPar2,uPar3,uPar4,uPar5)
 //  nResult:=ASIGN_PRES(dDesde,dHasta)
 RETURN nSalario
 // EOF
+/*
+
+
+/*

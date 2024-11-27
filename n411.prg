@@ -8,7 +8,7 @@ FUNCTION N411(nPar1,nPar2,nPar3,nPar4,nPar5,nPar6)
     ENDIF
 
     // C~lculos
-    lVariac:=.T. // Indica si Requiere Valor en VariaciÂ©n
+    lVariac:=.T. // Indica si Requiere Valor en Variaci©n
     nResult:=VARIAC
 
  ENDIF
@@ -28,3 +28,17 @@ FUNCTION UPDATE_DS()
 
 RETURN .T.
 // <EOF>
+/*
+Nómina: Datos Iniciales
+Recibe los Intereses ya Calculados antes del Registro del Trabajador.
+
+Acepta el monto total de los intereses calculados a la fecha, independiente que estén
+cancelados. Es necesario indicar en la configuración de la empresa la fecha de inicio
+para el cálculo de Intereses, debido a que estos ya fueron calculados por el usuario,
+logrando así que el sistema sólo calcule los intereses de los valores registrados para
+ el concepto "H400" a partir de esta fecha.  El pago de Intereses quedará compuesto
+ por dos elementos, el primero se refiere a los intereses introducidos por el usuario en 
+forma directa en "N411" y el segundo segmento se refiere a los intereses calculados 
+por el sistema  en "A411" a partir de la fecha indicada en configuración de la empresa.
+
+/*
