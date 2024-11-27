@@ -17,7 +17,8 @@ FUNCTION D004(uPar1,uPar2,uPar3,uPar4,uPar5)
 
            nLunes  :=FUNCION(6)
            nSalario:=FUNCION(5)
-           nResult :=PORCEN((SALARIO*360/52),CNS(01))*nLunes // CNS(01) % Seguro Social
+//         nResult :=PORCEN((SALARIO*360/52),CNS(01))*nLunes // CNS(01) % Seguro Social
+           nResult :=PORCEN(nSalario,CNS(01))*nLunes // CNS(01) % Seguro Social
            VARIAC  :=CNS(01)
 
         ENDIF
@@ -85,5 +86,13 @@ mínimo de 750 semanas cotizadas.
        nResult :=PORCEN(nSalario,CNS(01))*nLunes // CNS(01) % Seguro Social
        VARIAC  :=CNS(01)
      ENDIF
+
+Requerimientos
+
+a.	Defina el sueldo mínimo en la constante (26), necesario para calcular el monto tope, según la función F005
+b.	Defina la cantidad de salarios mínimos tope en la constante (20)
+c.	Implemente el proceso automático NMSALARIOMINIMO para mostrar en el panel de tareas el valor del salario mínimo urbano según la constante (26)
+
+((Sueldo_mensual*12)/52_semanas)*nLunes_quincena*4%
 
 /*
